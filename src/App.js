@@ -11,7 +11,7 @@ const xlsx = require("xlsx");
 const path = require("path");
 const dayjs = require("dayjs");
 const customParseFormat = require("dayjs/plugin/customParseFormat");
-const List = require("./models/List")
+const List = require("./models/List");
 
 require("dotenv").config();
 dayjs.extend(customParseFormat);
@@ -31,29 +31,25 @@ connectDB()
 
 app.use(express.json()); //json niddleware
 app.use(cookies()); //cookie middleware
-
-
 app.use(
   cors({
-    origin: "https://blood-donation-admin-frontend.vercel.app",
+    origin: [
+      "http://localhost:5173",
+      "https://blood-donation-admin-frontend.vercel.app/",
+    ],
     credentials: true,
-  })
-);
-
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Credentials", "true");
-  next();
-});
+  }),
+); //cors middleware
 
 const AuthRouter = require("./Routers/AuthRouter");
 const Profilerouter = require("./Routers/ProfileRouter");
 const DonorListRouter = require("./Routers/DonorListRouter");
-const UserRouter = require("./Routers/UserRouter")
+const UserRouter = require("./Routers/UserRouter");
 
 app.use("/", AuthRouter);
 app.use("/", Profilerouter);
-app.use("/" ,DonorListRouter);
-app.use("/" ,UserRouter);
+app.use("/", DonorListRouter);
+app.use("/", UserRouter);
 
 // const convertExcelDate = (value) => {
 //   if (!value) return null;
