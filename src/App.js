@@ -32,14 +32,14 @@ connectDB()
 app.use(express.json()); //json niddleware
 app.use(cookies()); //cookie middleware
 app.use(
-  cors({
-    origin: [
-      "http://localhost:5173",
-      "https://blood-donation-admin-frontend.vercel.app/",
-    ],
-    credentials: true,
-  }),
-); //cors middleware
+cors({
+origin: [
+"http://localhost:5173",
+"https://blood-donation-admin-frontend.vercel.app"
+],
+credentials: true
+})
+);
 
 const AuthRouter = require("./Routers/AuthRouter");
 const Profilerouter = require("./Routers/ProfileRouter");
