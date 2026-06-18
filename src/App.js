@@ -31,15 +31,19 @@ connectDB()
 
 app.use(express.json()); //json niddleware
 app.use(cookies()); //cookie middleware
+
+
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "https://blood-donation-admin-frontend.vercel.app"
-    ],
-    credentials: true
+    origin: "https://blood-donation-admin-frontend.vercel.app",
+    credentials: true,
   })
 );
+
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Credentials", "true");
+  next();
+});
 
 const AuthRouter = require("./Routers/AuthRouter");
 const Profilerouter = require("./Routers/ProfileRouter");
