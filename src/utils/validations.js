@@ -4,13 +4,13 @@ const User = require("../models/User");
 
 async function validations(value) {
   const { firstName, lastName, emailId } = value;
-  if (!firstName || !lastName) {
+  if (!firstName || !lastName || !emailId) {
     throw new Error("Name should be Valid");
   } else if (firstName.length > 50 || firstName.length < 2) {
     throw new Error("Name should be between length 2 to 50");
-  } else if (!validator.isEmail(emailId)) {
-    throw new Error("Enter Valid email id");
-  }
+  } else if (emailId.length > 50 || emailId.length < 2) {
+    throw new Error("User id should be between length 2 to 50");
+  } 
 }
 
 async function UserAuth(req, res, next) {
